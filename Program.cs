@@ -10,7 +10,8 @@ namespace lab56
     enum Uni { BSUIR, BSU, BNTU};
 
     interface IHeight
-    {                       
+    {
+        int Height { get; }
         bool isMoreThanAverege();                       
     }
     interface ISayHeight : IHeight
@@ -39,7 +40,7 @@ namespace lab56
         protected static int personCounter;
 
         public string Name { get; set; }
-        protected int Height { get; set; }
+        public int Height { get; }
         public Person(string name, int height)
         {
             Name = name;
