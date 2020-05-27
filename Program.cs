@@ -1,12 +1,22 @@
-﻿using System;
+using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace lab5
+namespace lab56
 {
     enum Uni { BSUIR, BSU, BNTU};
+
+    interface IHeight
+    {                       
+        bool isMoreThanAverege();                       
+    }
+    interface ISayHeight : IHeight
+    {
+        void sayIfMoreThanAverege();
+    }
 
     struct Faculty
     {
@@ -24,15 +34,16 @@ namespace lab5
         }
     }
 
-    class Person
+    class Person : ISayHeight
     {
         protected static int personCounter;
 
-        protected string Name { get; set; }
-
-        public Person(string name)
+        public string Name { get; set; }
+        protected int Height { get; set; }
+        public Person(string name, int height)
         {
             Name = name;
+            Height = height;
             personCounter++;
         }
 
@@ -44,13 +55,23 @@ namespace lab5
         {
             Console.WriteLine("Имя: " + Name);
         }
+        public bool isMoreThanAverege()
+        {
+            if (Height > 175) return true;
+            else return false;
+        }
+        public void sayIfMoreThanAverege()
+        {
+            if (isMoreThanAverege())
+                Console.WriteLine(Name + ": рост выше среднего - " + Height + " см\n");
+        }
     }
 
-    class Student : Person
-    {
-        protected string University { get; set; }
+    class Student : Person , IComparable
+        {
+        public string University { get; set; }
 
-        public Student(string name, int university) : base(name)
+        public Student(string name, int height, int university) : base(name, height)
         {
             this.University = Enum.GetName(typeof(Uni), university);
         }
@@ -58,13 +79,18 @@ namespace lab5
         {
             Console.WriteLine("Имя студента: " + Name + "\nУниверситет: " + University);
         }
+        public int CompareTo(object o)
+        {
+            Student s = o as Student;
+            return this.University.CompareTo(s.University);
+        }
     }
 
     class Worker : Person
     {
         protected string Job { get; set; }
 
-        public Worker(string name, string job) : base(name)
+        public Worker(string name, int height, string job) : base(name, height)
         {
             Job = job;
         }
@@ -78,7 +104,7 @@ namespace lab5
     {
         protected string Specialty { get; set; }
 
-        public StudentWithSpecialty(string name, int university, string specialty) : base(name, university)
+        public StudentWithSpecialty(string name, int height, int university, string specialty) : base(name, height, university)
         {
             Specialty = specialty;
         }
@@ -93,15 +119,23 @@ namespace lab5
         static void Main(string[] args)
         {
             Faculty FRE = new Faculty("ФРЭ", 0 );
-            StudentWithSpecialty prog = new StudentWithSpecialty("Ваня", 0, "Программист");
-            StudentWithSpecialty math = new StudentWithSpecialty("Маша", 1, "Математик");
-            StudentWithSpecialty paint = new StudentWithSpecialty("Петя", 2, "Художник");         
-            Worker worker1 = new Worker("Александр", "Директор");
+            StudentWithSpecialty prog = new StudentWithSpecialty("Ваня", 180, 0, "Программист");
+            StudentWithSpecialty math = new StudentWithSpecialty("Маша", 160, 0, "Математик");
+            StudentWithSpecialty paint = new StudentWithSpecialty("Петя", 200, 2, "Художник");         
+            Worker worker1 = new Worker("Александр", 190, "Директор");
 
             FRE.displayInfo();
             prog.Show();
             worker1.Show();
+            paint.sayIfMoreThanAverege();
             Person.peopleAmount();
+            if (prog.CompareTo(math) == 0)
+            {
+                Console.WriteLine(prog.Name + " и " + math.Name + " учатся в одном университете:" + prog.University + " \n");
+            } else
+            {
+                Console.WriteLine(prog.Name + " и " + math.Name + " учатся в разных университетах\n");
+            }            
 
             Console.ReadKey();
         }
