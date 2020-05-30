@@ -11,7 +11,7 @@ namespace lab56
 
     interface IHeight
     {
-        int Height { get; }
+        int Height { get; }                       
         bool isMoreThanAverege();                       
     }
     interface ISayHeight : IHeight
@@ -31,7 +31,7 @@ namespace lab56
         }
         public void displayInfo()
         {
-            Console.WriteLine($"Название факультета: {name}  Университет: {uni}\n");
+            Console.WriteLine("Название факультета: " + name + "  Университет: " + uni + "\n");
         }
     }
 
