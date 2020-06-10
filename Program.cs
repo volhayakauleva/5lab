@@ -66,6 +66,8 @@ namespace lab56
             if (isMoreThanAverege())
                 Console.WriteLine(Name + ": рост выше среднего - " + Height + " см\n");
         }
+        
+        public virtual void newVoid() { Console.WriteLine("from person"); }
     }
 
     class Student : Person , IComparable
@@ -99,6 +101,9 @@ namespace lab56
         {
             Console.WriteLine("Имя работника: " + Name + "\nРабота: " + Job + "\n");
         }
+                
+        public override void newVoid()
+        { Console.WriteLine("from worker"); }
     }
 
     class StudentWithSpecialty : Student
@@ -141,7 +146,7 @@ namespace lab56
             
             Person newPersWork = new Worker("newWorker", 200, "newWork");
             newPersWork.Show();
-            
+            newPersWork.newVoid();
                    
             Console.ReadKey();
         }
