@@ -138,6 +138,11 @@ namespace lab56
                 Console.WriteLine(prog.Name + " и " + math.Name + " учатся в разных университетах\n");
             }            
 
+            
+            Person newPersWork = new Worker("newWorker", 200, "newWork");
+            newPersWork.Show();
+            
+                   
             Console.ReadKey();
         }
     }
