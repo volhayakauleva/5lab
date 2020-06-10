@@ -145,8 +145,8 @@ namespace lab56
 
             
             Person newPersWork = new Worker("newWorker", 200, "newWork");
-            newPersWork.Show();
-            newPersWork.newVoid();
+            newPersWork.Show();     //new, метод из person
+            newPersWork.newVoid();  //override, метод из worker
                    
             Console.ReadKey();
         }
