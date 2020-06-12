@@ -26,6 +26,7 @@ namespace lab56
             this.name = name;
             this.uni = Enum.GetName(typeof(Uni), university);
         }
+        
         public void displayInfo()
         {
             Console.WriteLine("Название факультета: " + name + "  Университет: " + uni + "\n");
@@ -38,6 +39,7 @@ namespace lab56
 
         public string Name { get; set; }
         public int Height { get; }
+        
         public Person(string name, int height)
         {
             Name = name;
@@ -49,36 +51,44 @@ namespace lab56
         {
             Console.WriteLine("Общее количество людей: " + personCounter);
         }
+        
         public void Show()
         {
             Console.WriteLine("Имя: " + Name);
         }
+        
         public bool isMoreThanAverege()
         {
             if (Height > 175) return true;
             else return false;
         }
+        
         public void sayIfMoreThanAverege()
         {
             if (isMoreThanAverege())
                 Console.WriteLine(Name + ": рост выше среднего - " + Height + " см\n");
         }
         
-        public virtual void newVoid() { Console.WriteLine("from person"); }
+        public virtual void newVoid() 
+        { 
+            Console.WriteLine("from person"); 
+        }
     }
 
     class Student : Person , IComparable
-        {
+    {
         public string University { get; set; }
 
         public Student(string name, int height, int university) : base(name, height)
         {
             this.University = Enum.GetName(typeof(Uni), university);
         }
+        
         public new void Show()
         {
             Console.WriteLine("Имя студента: " + Name + "\nУниверситет: " + University);
         }
+        
         public int CompareTo(object o)
         {
             Student s = o as Student;
@@ -94,13 +104,16 @@ namespace lab56
         {
             Job = job;
         }
+        
         public new void Show()
         {
             Console.WriteLine("Имя работника: " + Name + "\nРабота: " + Job + "\n");
         }
                 
         public override void newVoid()
-        { Console.WriteLine("from worker"); }
+        { 
+            Console.WriteLine("from worker"); 
+        }
     }
 
     class StudentWithSpecialty : Student
@@ -111,6 +124,7 @@ namespace lab56
         {
             Specialty = specialty;
         }
+        
         public new void Show()
         {
             Console.WriteLine("Имя студента: " + Name + "\nУниверситет: " + University + "\nСпециальность: " + Specialty + "\n");
