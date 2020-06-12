@@ -9,13 +9,10 @@ namespace lab56
 {
     enum Uni { BSUIR, BSU, BNTU};
 
-    interface IHeight
+    interface ISayHeight
     {
         int Height { get; }                       
-        bool isMoreThanAverege();                       
-    }
-    interface ISayHeight : IHeight
-    {
+        bool isMoreThanAverege(); 
         void sayIfMoreThanAverege();
     }
 
